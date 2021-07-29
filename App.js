@@ -1,13 +1,13 @@
 //import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, } from 'react-native';
-import Main from './components/Main'
+import MainStack from './navigate'
 import Favorites from './components/Favorites'
 
 export default function App() {
 
   return (
-    <Main />
+    <MainStack />
   );
 }
 
