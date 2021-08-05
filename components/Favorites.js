@@ -60,14 +60,6 @@ export default function Favorites() {
           <Image style={styles.logo} source={{ uri: item.url }} />
         )}
       />
-
-      <TouchableOpacity>
-        <Image
-          style={styles.borat}
-          source={require("../assets/borat---ne-ochen_16215134_orig_.jpeg")}
-        />
-      </TouchableOpacity>
-
       <StatusBar style="auto" />
     </View>
   );

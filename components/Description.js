@@ -12,8 +12,14 @@ import {
 
 export default function Description({ route }) {
   const [displayCatUrl, setCatUrl] = useState(route.params.image.url);
+  const [catId, setCatId] = useState(route.params.image.id);
+
+  const data = {
+    image_id: catId,
+    sub_id: "ap-39",
+  };
   const url = `https://api.thecatapi.com/v1/images/search?breed_id=${route.params.breedId}`;
-  const settings = {
+  const settingsNext = {
     async: true,
     crossDomain: true,
     method: "GET",
@@ -22,17 +28,41 @@ export default function Description({ route }) {
     },
   };
   const nextCat = () => {
-    fetch(url, settings)
+    fetch(url, settingsNext)
       .then((res) => res.json())
       .then((cats) => {
-        console.log(cats[0]);
         setCatUrl(cats[0].url);
+        setCatId(cats[0].id);
       })
       .catch((error) => {
         console.log("Error", error);
       });
   };
-  console.log(displayCatUrl);
+
+  const settingsLike = {
+    async: true,
+    crossDomain: true,
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-api-key": "ea505b5c-e873-4b18-86ca-d855815a2cbc",
+    },
+    processData: false,
+    body: JSON.stringify(data),
+  };
+
+  const likeCat = () => {
+    fetch("https://api.thecatapi.com/v1/favourites", settingsLike)
+      .then((res) => res.json())
+      .then((item) => {
+        console.log(item);
+      })
+
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text>{route.params.name}</Text>
@@ -43,6 +73,7 @@ export default function Description({ route }) {
         }}
       />
       <Button title={"next"} onPress={nextCat} />
+      <Button title={"like"} onPress={likeCat} />
       <Text>{route.params.description}</Text>
     </View>
   );
