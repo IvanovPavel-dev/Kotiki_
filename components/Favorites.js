@@ -1,16 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Button, Image, FlatList } from "react-native";
 
-// const apiKey = 'ea505b5c-e873-4b18-86ca-d855815a2cbc'
 const url = "https://api.thecatapi.com/v1/favourites";
 const settings = {
   async: true,
@@ -33,7 +24,7 @@ function toArrObj(arr) {
   return arrObj;
 }
 
-export default function Favorites() {
+function Favorites() {
   const [favoriteCatsUrls, setFavoriteCatsUrls] = useState([]);
 
   const getFavoriteCats = () => {
@@ -85,9 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// <Image
-//         style={styles.logo}
-//         source={{
-//           uri: 'https://image.freepik.com/free-vector/declaration-disappearance-beloved-cat-runaway-animal-is-danger-flat-illustration_124715-416.jpg',
-//         }}
-//       />
+export default Favorites;

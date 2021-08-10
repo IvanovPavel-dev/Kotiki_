@@ -25,7 +25,7 @@ function toArrObj(arr) {
   return arrObj;
 }
 
-export default function Breeds({ navigation }) {
+function Breeds({ navigation }) {
   const [breeds, setBreeds] = useState([]);
   const getBreeds = () => {
     const settingsBreed = {
@@ -90,3 +90,5 @@ const styles = StyleSheet.create({
 });
 {
 }
+
+export default Breeds;
