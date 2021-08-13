@@ -74,27 +74,25 @@ export default function Description({ route }) {
       />
       <Button title={"next"} onPress={nextCat} />
       <Button title={"like"} onPress={likeCat} />
-      <Text>{route.params.description}</Text>
+      <Text style={styles.text}>{route.params.description}</Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    backgroundColor: "#a4d8fc",
+    backgroundColor: "#facfa7",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 50,
   },
   logo: {
     width: 250,
     height: 250,
     borderRadius: 10,
   },
-  borat: {
-    width: 250,
-    height: 40,
-    borderRadius: 15,
+  text: {
+    paddingTop: 20,
   },
 });
 {

@@ -10,19 +10,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-export default function Navigate() {
+export default function Navigate({ navigation }) {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Breeds"
-        component={Breeds}
-        option={{ title: "Породы" }}
-      />
-      <Stack.Screen
-        name="Description"
-        component={Description}
-        option={{ title: "О породе" }}
-      />
+      <Stack.Screen name="Breeds" component={Breeds} />
+      <Stack.Screen name="Description" component={Description} />
     </Stack.Navigator>
   );
 }

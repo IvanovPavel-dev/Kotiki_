@@ -25,7 +25,7 @@ export default function MyTabs() {
       screenOptions={{
         tabBarStyle: {
           position: "absolute",
-          bottom: 25,
+          bottom: 15,
           left: 20,
           right: 20,
           elevation: 0,
@@ -35,7 +35,7 @@ export default function MyTabs() {
         },
       }}
     >
-      <Tab.Screen name="Breeds" component={Navigate} />
+      <Tab.Screen name="CatCategory" component={Navigate} />
       <Tab.Screen name="Favorites" component={Favorites} />
     </Tab.Navigator>
   );

@@ -59,10 +59,10 @@ function Favorites() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    backgroundColor: "#a4d8fc",
+    backgroundColor: "#facfa7",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: 75,
   },
   logo: {
     width: 250,
