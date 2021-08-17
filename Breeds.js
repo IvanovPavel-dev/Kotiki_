@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,6 +9,7 @@ import {
   FlatList,
   Text,
 } from "react-native";
+import { getBreeds } from "./components/api";
 
 function toArrObj(arr) {
   let arrObj = [];
@@ -27,30 +28,12 @@ function toArrObj(arr) {
 
 function Breeds({ navigation }) {
   const [breeds, setBreeds] = useState([]);
-  const getBreeds = () => {
-    const settingsBreed = {
-      async: true,
-      crossDomain: true,
-      method: "GET",
-      headers: {
-        "x-api-key": "ea505b5c-e873-4b18-86ca-d855815a2cbc",
-      },
-    };
-
-    fetch("https://api.thecatapi.com/v1/breeds?attach_breed=0", settingsBreed)
-      .then((res) => res.json())
-      .then((item) => {
-        // console.log(item);
-        const tempItem = toArrObj(item);
-        //  console.log(tempItem);
-        setBreeds(tempItem);
-      })
-      .catch((error) => {
-        console.log("Error", error);
-      });
-  };
-  console.log(breeds);
-
+  useEffect(() => {
+    getBreeds();
+    //setBreeds(tempItem);
+  });
+  //setBreeds(tempItem);
+  //const [breeds, setBreeds] = useState([]);
   return (
     <View style={styles.container}>
       <Button title={"Породы"} onPress={getBreeds} />

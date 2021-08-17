@@ -1,25 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import {
-  StyleSheet,
-  View,
-  Button,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  Text,
-} from "react-native";
-
-import Temp from "./temp";
 import Favorites from "./Favorites";
-import Breeds from "../Breeds";
-import Main from "./Main";
 import Navigate from "../navigate";
+import Temp from "./temp";
 
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+const MyTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -35,8 +22,17 @@ export default function MyTabs() {
         },
       }}
     >
-      <Tab.Screen name="CatCategory" component={Navigate} />
-      <Tab.Screen name="Favorites" component={Favorites} />
+      <Tab.Screen
+        name="Navigate"
+        component={Navigate}
+        screenOptions={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Favorites"
+        component={Favorites}
+        screenOptions={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
-}
+};
+export default MyTabs;

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Button, Image, FlatList } from "react-native";
 
 const url = "https://api.thecatapi.com/v1/favourites";
@@ -26,7 +26,10 @@ function toArrObj(arr) {
 
 function Favorites() {
   const [favoriteCatsUrls, setFavoriteCatsUrls] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    getFavoriteCats();
+  }, []);
   const getFavoriteCats = () => {
     fetch(url, settings)
       .then((res) => res.json())
@@ -35,6 +38,9 @@ function Favorites() {
         const catsObjs = toArrObj(catUrls);
         //console.log(catsObjs)
         setFavoriteCatsUrls(catsObjs);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
       })
       .catch((error) => {
         console.log("Error", error);
@@ -44,7 +50,14 @@ function Favorites() {
 
   return (
     <View style={styles.container}>
-      <Button title={"пакажи любимчиков"} onPress={getFavoriteCats} />
+      {isLoading && (
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://cryptopet.net/static/media/lg.blue-longcat-spinner.dbcca15c.gif",
+          }}
+        />
+      )}
       <FlatList
         data={favoriteCatsUrls}
         renderItem={({ item }) => (
