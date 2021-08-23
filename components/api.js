@@ -1,22 +1,7 @@
 import * as axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function toArrObj(arr) {
-  let arrObj = [];
-  for (let i = 0; i < arr.length; i++) {
-    let tempObj = {
-      key: i.toString(),
-      name: arr[i].name,
-      description: arr[i].description,
-      image: arr[i].image,
-      breedId: arr[i].id,
-    };
-    arrObj.push(tempObj);
-  }
-  return arrObj;
-}
-
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: "https://api.thecatapi.com/v1/",
   async: true,
   crossDomain: true,
@@ -26,19 +11,22 @@ const instance = axios.create({
   },
 });
 
-export const getBreeds = () => {
-  return instance
-    .get(`breeds?attach_breed=0`)
-    .then((res) => {
-      return res.data;
-    })
-    .then((data) => {
-      console.log(data);
-      const tempItem = toArrObj(data);
-      // setBreeds(tempItem);
-    })
-    .catch((error) => {
-      console.log("Error", error);
-    });
-  return tempItem;
+export const getFavorites = () => {
+  const [favoriteCatsUrls, setFavoriteCatsUrls] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    async function fetchFavorites() {
+      const request = await instance.get(`favourites`);
+      //console.log(request);
+      const catsObjs = request.data.map((item) => {
+        const a = { url: item.image.url, key: item.id };
+        return a;
+      });
+
+      setFavoriteCatsUrls(catsObjs);
+      setIsLoading(false);
+    }
+    fetchFavorites();
+  }, []);
+  return [favoriteCatsUrls, isLoading];
 };
