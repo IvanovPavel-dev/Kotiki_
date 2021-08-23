@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 export default function Description({ route }) {
-  const [displayCatUrl, setCatUrl] = useState(route.params.image.url);
+  const [displayCatUrl, setCatUrl] = useState(route.params.image);
   const [catId, setCatId] = useState(route.params.image.id);
 
   const data = {
