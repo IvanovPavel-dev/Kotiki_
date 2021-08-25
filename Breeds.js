@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -8,53 +8,11 @@ import {
   FlatList,
   Text,
 } from "react-native";
-import { instance } from "./components/api";
-
-const missingBreedUrl =
-  "https://media.istockphoto.com/vectors/the-declaration-of-the-disappearance-of-a-beloved-cat-the-runaway-is-vector-id1210366497?k=6&m=1210366497&s=612x612&w=0&h=nhnf9Cvn4WUOP19LMOZ-BCTRhhOy1KH54jKXVClR8f4=";
-
-function filterObj(arr) {
-  const obj = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i].image === undefined) {
-      arr[i].image = missingBreedUrl;
-      obj.push(arr[i]);
-    } else {
-      const tempItem = arr[i].image.url;
-      arr[i].image = tempItem;
-      obj.push(arr[i]);
-    }
-  }
-  return obj;
-}
+import { getBreeds } from "./components/api";
 
 function Breeds({ navigation }) {
-  const [breeds, setBreeds] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    async function getBreeds() {
-      const request = await instance.get(`breeds?attach_breed=0`);
-      console.log(request);
-      const tempItem = request.data.map((item) => {
-        const a = {
-          image: item.image,
-          key: item.name,
-          description: item.description,
-          name: item.name,
-          breedId: item.id,
-        };
-        return a;
-      });
-      //const tempItem = toArrObjDescription(request.data);
-      console.log(tempItem);
-      filterObj(tempItem);
-      console.log(tempItem);
-      setBreeds(tempItem);
-      setIsLoading(false);
-    }
-    getBreeds();
-  }, []);
-
+  const [breeds, isLoading] = getBreeds();
+  console.log(breeds);
   return (
     <View style={styles.container}>
       {isLoading && (

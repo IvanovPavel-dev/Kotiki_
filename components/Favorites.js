@@ -5,7 +5,6 @@ import { getFavorites } from "./api";
 
 function Favorites() {
   const [favoriteCatsUrls, isLoading] = getFavorites();
-  //console.log(favoriteCatsUrls);
 
   return (
     <View style={styles.container}>

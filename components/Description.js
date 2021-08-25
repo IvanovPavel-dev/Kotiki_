@@ -1,42 +1,14 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Button,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  Text,
-} from "react-native";
+import { StyleSheet, View, Button, Image, Text } from "react-native";
+import { nextCatA, likeCatPost } from "./api";
 
 export default function Description({ route }) {
-  const [displayCatUrl, setCatUrl] = useState(route.params.image);
+  const [displayCatUrl, setCatUrl] = useState(route.params.image.url);
   const [catId, setCatId] = useState(route.params.image.id);
 
   const data = {
     image_id: catId,
     sub_id: "ap-39",
-  };
-  const url = `https://api.thecatapi.com/v1/images/search?breed_id=${route.params.breedId}`;
-  const settingsNext = {
-    async: true,
-    crossDomain: true,
-    method: "GET",
-    headers: {
-      "x-api-key": "ea505b5c-e873-4b18-86ca-d855815a2cbc",
-    },
-  };
-  const nextCat = () => {
-    fetch(url, settingsNext)
-      .then((res) => res.json())
-      .then((cats) => {
-        setCatUrl(cats[0].url);
-        setCatId(cats[0].id);
-      })
-      .catch((error) => {
-        console.log("Error", error);
-      });
   };
 
   const settingsLike = {
@@ -54,6 +26,7 @@ export default function Description({ route }) {
   const likeCat = () => {
     fetch("https://api.thecatapi.com/v1/favourites", settingsLike)
       .then((res) => res.json())
+
       .then((item) => {
         console.log(item);
       })
@@ -61,7 +34,19 @@ export default function Description({ route }) {
       .catch((error) => {
         console.log("Error", error);
       });
+    debugger;
   };
+  async function nextCat() {
+    const catObj = await nextCatA(
+      `images/search?breed_id=${route.params.breedId}`
+    );
+    setCatUrl(catObj.url);
+    setCatId(catObj.catId);
+  }
+
+  async function likeCatO() {
+    const request = await likeCatPost(catId);
+  }
 
   return (
     <View style={styles.container}>
@@ -73,6 +58,7 @@ export default function Description({ route }) {
         }}
       />
       <Button title={"next"} onPress={nextCat} />
+      <Button title={"likeO"} onPress={likeCatO} />
       <Button title={"like"} onPress={likeCat} />
       <Text style={styles.text}>{route.params.description}</Text>
     </View>
