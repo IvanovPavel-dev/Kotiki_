@@ -25,12 +25,12 @@ const MyTabs = () => {
       <Tab.Screen
         name="Navigate"
         component={Navigate}
-        screenOptions={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Favorites"
         component={Favorites}
-        screenOptions={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Tab.Navigator>
   );
