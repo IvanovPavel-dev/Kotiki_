@@ -50,7 +50,7 @@ export const getBreeds = () => {
   useEffect(() => {
     async function getBreeds() {
       const request = await instance.get(`breeds?attach_breed=0`);
-      console.log(request);
+      //console.log(request);
       const tempItem = request.data.map((item) => {
         const a = {
           image: item.image,

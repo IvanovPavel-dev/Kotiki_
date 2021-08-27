@@ -2,15 +2,16 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, Image, FlatList } from "react-native";
 import { getFavorites } from "./api";
+import { gStyle } from "../styles/style";
 
 function Favorites() {
   const [favoriteCatsUrls, isLoading] = getFavorites();
 
   return (
-    <View style={styles.container}>
+    <View style={gStyle.main}>
       {isLoading && (
         <Image
-          style={styles.logo}
+          style={gStyle.picture}
           source={{
             uri: "https://cryptopet.net/static/media/lg.blue-longcat-spinner.dbcca15c.gif",
           }}
@@ -20,7 +21,7 @@ function Favorites() {
         <FlatList
           data={favoriteCatsUrls}
           renderItem={({ item }) => (
-            <Image style={styles.logo} source={{ uri: item.url }} />
+            <Image style={gStyle.picture} source={{ uri: item.url }} />
           )}
         />
       )}
@@ -28,20 +29,5 @@ function Favorites() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#facfa7",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 75,
-  },
-  logo: {
-    width: 250,
-    height: 250,
-    borderRadius: 50,
-  },
-});
 
 export default Favorites;

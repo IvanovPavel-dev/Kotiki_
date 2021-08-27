@@ -12,12 +12,20 @@ export default function Navigate({ navigation }) {
       <Stack.Screen
         name="Breeds"
         component={Breeds}
-        screenOptions={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: "#b06a6a", height: 60 },
+          headerTitleStyle: { color: "#ffadad" },
+        }}
       />
       <Stack.Screen
         name="Description"
         component={Description}
-        screenOptions={{ headerShown: false }}
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: "#b06a6a", height: 60 },
+          headerTitleStyle: { color: "#ffadad" },
+        }}
       />
     </Stack.Navigator>
   );

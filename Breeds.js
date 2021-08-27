@@ -9,15 +9,16 @@ import {
   Text,
 } from "react-native";
 import { getBreeds } from "./components/api";
+import { gStyle } from "./styles/style";
 
 function Breeds({ navigation }) {
   const [breeds, isLoading] = getBreeds();
-  console.log(breeds);
+  //console.log(breeds);
   return (
-    <View style={styles.container}>
+    <View style={gStyle.main}>
       {isLoading && (
         <Image
-          style={styles.logo}
+          style={gStyle.picture}
           source={{
             uri: "https://cryptopet.net/static/media/lg.blue-longcat-spinner.dbcca15c.gif",
           }}
@@ -27,31 +28,19 @@ function Breeds({ navigation }) {
         data={breeds}
         renderItem={({ item }) => (
           <TouchableOpacity
+            style={gStyle.list}
             onPress={() => navigation.navigate("Description", item)}
           >
-            <Text>{item.name}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Image style={gStyle.logo} source={{ uri: item.image.url }} />
+              <Text style={gStyle.title}>{item.name}</Text>
+            </View>
           </TouchableOpacity>
         )}
       />
       <StatusBar style="auto" />
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#facfa7",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 75,
-  },
-  logo: {
-    width: 250,
-    height: 250,
-  },
-});
-{
 }
 
 export default Breeds;

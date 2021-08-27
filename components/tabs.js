@@ -2,7 +2,6 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Favorites from "./Favorites";
 import Navigate from "../navigate";
-import Temp from "./temp";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +15,7 @@ const MyTabs = () => {
           left: 20,
           right: 20,
           elevation: 0,
-          backgroundColor: "#ffffff",
+          backgroundColor: "#b06a6a",
           borderRadius: 15,
           height: 50,
         },
@@ -30,7 +29,11 @@ const MyTabs = () => {
       <Tab.Screen
         name="Favorites"
         component={Favorites}
-        options={{ headerShown: true }}
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: "#b06a6a", height: 60 },
+          headerTitleStyle: { color: "#ffadad" },
+        }}
       />
     </Tab.Navigator>
   );
